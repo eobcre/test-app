@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { USERS } from '../../../data/data';
+import { USERS } from '../../../data/data.js';
 
 @Component({
   selector: 'app-users',
