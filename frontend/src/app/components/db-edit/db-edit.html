@@ -1,0 +1,82 @@
+<div class="edit-container">
+  <div class="grid-row heading">
+    <div>Name</div>
+    <div>Address</div>
+    <div>City</div>
+    <div>State</div>
+    <div>Postal Code</div>
+    <div>Phone Number</div>
+    <div></div>
+  </div>
+
+  @for (hospital of hospitals(); track hospital.id) {
+    <div class="grid-row">
+      @if (editingId() === hospital.id) {
+        <input
+          #nameInput
+          type="text"
+          class="edit-input"
+          [value]="draftName()"
+          (input)="draftName.set(nameInput.value)"
+        />
+        <input
+          #addressInput
+          type="text"
+          class="edit-input"
+          [value]="draftAddress()"
+          (input)="draftAddress.set(addressInput.value)"
+        />
+        <input
+          #cityInput
+          type="text"
+          class="edit-input"
+          [value]="draftCity()"
+          (input)="draftCity.set(cityInput.value)"
+        />
+        <input
+          #stateInput
+          type="text"
+          class="edit-input"
+          [value]="draftState()"
+          (input)="draftState.set(stateInput.value)"
+        />
+        <input
+          #postcodeInput
+          type="text"
+          class="edit-input"
+          [value]="draftPostcode()"
+          (input)="draftPostcode.set(postcodeInput.value)"
+        />
+        <input
+          #phoneInput
+          type="text"
+          class="edit-input"
+          [value]="draftPhone()"
+          (input)="draftPhone.set(phoneInput.value)"
+        />
+      } @else {
+        <div class="row">{{ hospital.name }}</div>
+        <div class="row">{{ hospital.address }}</div>
+        <div class="row">{{ hospital.city }}</div>
+        <div class="row">{{ hospital.state }}</div>
+        <div class="row">{{ hospital.postcode }}</div>
+        <div class="row">{{ hospital.phone }}</div>
+      }
+
+      <div class="row actions">
+        <app-button (clicked)="onEdit(hospital)">
+          <img src="assets/edit-icon.png" alt="EditIcon" width="24px" height="24px" />
+        </app-button>
+        <app-button (clicked)="onSave(hospital.id)">
+          <img src="assets/save-icon.png" alt="SaveIcon" width="24px" height="24px" />
+        </app-button>
+      </div>
+    </div>
+  } @empty {
+    @if (searchCompleted()) {
+      <div class="not-found-container">
+        <p class="not-found">No hospitals found.</p>
+      </div>
+    }
+  }
+</div>

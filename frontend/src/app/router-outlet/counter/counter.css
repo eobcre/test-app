@@ -1,0 +1,13 @@
+.button-container {
+  display: flex;
+  gap: 0.6rem;
+}
+
+button {
+  cursor: pointer;
+  padding: 0.1rem 0.8rem;
+}
+
+.count-display-container {
+  margin-top: 1rem;
+}

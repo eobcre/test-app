@@ -1,0 +1,36 @@
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.tab {
+  color: #555;
+  border: 1px solid transparent;
+  border-radius: 6px 6px 0 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 10px 24px;
+}
+
+.tab:hover {
+  background: #f5f5f5;
+}
+
+.tab.active {
+  color: #222;
+  background: white;
+  border-color: #ccc;
+  border-bottom-color: white;
+  margin-bottom: -1px;
+}
+
+.tab:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: -4px;
+}
+
+.title {
+  color: #303030;
+  margin-bottom: 2rem;
+}

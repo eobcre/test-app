@@ -1,0 +1,10 @@
+<div class="content-list">
+  <ul>
+    @for (user of users(); track user.id) {
+      <div class="list-container">
+        <li>Name: {{ user.name }}</li>
+        <li>Email: {{ user.email }}</li>
+      </div>
+    }
+  </ul>
+</div>

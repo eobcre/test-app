@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: hospital_user
+      POSTGRES_PASSWORD: hospital_pass
+      POSTGRES_DB: hospital_db
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - hospital_data:/var/lib/postgresql/data
+  
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    environment:
+      PGHOST: db
+      PGPORT: 5432
+      PGUSER: hospital_user
+      PGPASSWORD: hospital_pass
+      PGDATABASE: hospital_db
+    depends_on:
+      - db
+
+volumes:
+  hospital_data:

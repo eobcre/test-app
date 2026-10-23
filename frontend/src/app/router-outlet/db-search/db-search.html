@@ -1,0 +1,38 @@
+<div class="container">
+  <h1 class="title">Hospital DB</h1>
+  <!-- tabs -->
+  <div class="db-details-container">
+    <div class="tabs">
+      <button
+        type="button"
+        class="tab"
+        [class.active]="activeTab === 'search'"
+        (click)="activeTab = 'search'"
+      >
+        Search
+      </button>
+      <button
+        type="button"
+        class="tab"
+        [class.active]="activeTab === 'edit'"
+        (click)="activeTab = 'edit'"
+      >
+        Edit
+      </button>
+    </div>
+
+    @if (activeTab === 'search') {
+      <app-search
+        (onSearch)="onSearch($event)"
+        (onChange)="errorMessage.set('')"
+        [errorMessage]="errorMessage()"
+      ></app-search>
+      <!-- <app-search (onChange)="onInputChange($event)"></app-search> -->
+      <app-db-grid [hospitals]="hospitals()" [searchCompleted]="searchCompleted()"></app-db-grid>
+    }
+
+    @if (activeTab === 'edit') {
+      <app-db-edit [hospitals]="hospitals()" [searchCompleted]="searchCompleted()"></app-db-edit>
+    }
+  </div>
+</div>

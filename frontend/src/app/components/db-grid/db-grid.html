@@ -1,0 +1,25 @@
+<div class="grid-row heading">
+  <div>Name</div>
+  <div>Address</div>
+  <div>City</div>
+  <div>State</div>
+  <div>Postal Code</div>
+  <div>Phone Number</div>
+</div>
+
+@for (hospital of hospitals(); track hospital.id) {
+  <div class="grid-row">
+    <div class="row">{{ hospital.name }}</div>
+    <div class="row">{{ hospital.address }}</div>
+    <div class="row">{{ hospital.city }}</div>
+    <div class="row">{{ hospital.state }}</div>
+    <div class="row">{{ hospital.postcode }}</div>
+    <div class="row">{{ hospital.phone }}</div>
+  </div>
+} @empty {
+  @if (searchCompleted()) {
+    <div class="not-found-container">
+      <p class="not-found">No hospitals found.</p>
+    </div>
+  }
+}

@@ -1,0 +1,31 @@
+.grid-row {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 1fr 1fr 1.5fr;
+}
+
+.grid-row > div {
+  border-bottom: 1px solid lightgray;
+  overflow-wrap: anywhere;
+  padding: 12px;
+}
+
+.row {
+  color: #303030;
+  font-size: 0.9rem;
+}
+
+.heading {
+  color: #303030;
+  font-weight: bold;
+}
+
+.not-found-container {
+  text-align: center;
+  padding: 32px 16px;
+}
+
+.not-found {
+  color: gray;
+  font-size: 1rem;
+  font-style: italic;
+}

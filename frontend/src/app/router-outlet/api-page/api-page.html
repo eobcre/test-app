@@ -1,0 +1,9 @@
+<div class="container">
+  <ul>
+    @for (message of messages(); track message.id) {
+      <div class="message-container">
+        <li>{{ message.text }}</li>
+      </div>
+    }
+  </ul>
+</div>

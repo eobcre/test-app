@@ -1,0 +1,15 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: cornflowerblue;
+  padding: 0 1rem;
+  height: 4rem;
+}
+
+.title {
+  color: #303030;
+  text-decoration: none;
+}

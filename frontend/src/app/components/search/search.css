@@ -1,0 +1,36 @@
+.search-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  width: fit-content;
+}
+
+.search-field {
+  position: relative;
+}
+
+.search-container input {
+  outline: none;
+  padding: 0.3rem;
+  width: 30rem;
+}
+
+.search-container button {
+  position: absolute;
+  right: 0.5rem;
+  top: 55%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.search-container button:hover {
+  opacity: 0.3;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.85rem;
+}

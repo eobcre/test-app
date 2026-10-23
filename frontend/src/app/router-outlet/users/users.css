@@ -1,0 +1,16 @@
+li {
+  list-style: none;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.content-list {
+  padding: 2rem 0 0 1.6rem;
+}
+
+.list-container {
+  margin-bottom: 1rem;
+}
