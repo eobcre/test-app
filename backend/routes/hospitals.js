@@ -20,22 +20,22 @@ router.get('/', async (req, res) => {
 
   try {
     const result = await pool.query(
-      `WITH state_list AS (
+      `WITH state_data AS (
         SELECT
-          LOWER(key) AS code,
-          LOWER(value) AS full_name
+          LOWER(key) AS state_code,
+          LOWER(value) AS full_state_name
         FROM jsonb_each_text($2::jsonb)
         )
 
         SELECT h.*
         FROM hospitals AS h
 
-        LEFT JOIN state_list AS s
-          ON LOWER(TRIM(h.state)) = s.code
-          OR LOWER(TRIM(h.state)) = s.full_name
+        LEFT JOIN state_data AS s
+          ON LOWER(TRIM(h.state)) = s.state_code
+          OR LOWER(TRIM(h.state)) = s.full_state_name
 
-        WHERE LOWER($1) = s.code
-           OR word_similarity($1, COALESCE(s.full_name, h.state, '')) > 0.4
+        WHERE LOWER($1) = s.state_code
+           OR word_similarity($1, COALESCE(s.full_state_name, h.state, '')) > 0.4
            OR word_similarity($1, COALESCE(h.name, '')) > 0.4
            OR word_similarity($1, COALESCE(h.address, '')) > 0.4
            OR word_similarity($1, COALESCE(h.city, '')) > 0.4
@@ -47,15 +47,6 @@ router.get('/', async (req, res) => {
       // $1, $2
       [searchTerm, statesJson],
     );
-
-    // const result = await pool.query(
-    //   `SELECT id, name, address, city, state, postcode, phone
-    //      FROM hospitals
-    //      WHERE $1 <% name
-    //      ORDER BY word_similarity($1, name) DESC, id
-    //      LIMIT 10`,
-    //   [searchTerm.trim()],
-    // );
     res.json(result.rows);
   } catch (error) {
     console.error(error);
