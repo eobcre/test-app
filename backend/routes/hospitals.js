@@ -1,18 +1,18 @@
 import express from 'express';
 import pool from '../db.js';
 
-import statesData from '../utils/statesData.js';
+import { statesJson } from '../utils/statesData.js';
 
 const router = express.Router();
 
 // search api
 router.get('/', async (req, res) => {
-  const searchTerm = req.query.search;
+  const searchTerm = String(req.query.search ?? '').trim();
   // console.log('searchTerm:', searchTerm);
   // res.send(`Received: ${searchTerm}`);
 
   // validation - search
-  if (!searchTerm || !searchTerm.trim()) {
+  if (!searchTerm) {
     return res.status(400).json({
       message: 'Type something...',
     });
@@ -20,13 +20,42 @@ router.get('/', async (req, res) => {
 
   try {
     const result = await pool.query(
-      `SELECT id, name, address, city, state, postcode, phone
-         FROM hospitals
-         WHERE $1 <% name
-         ORDER BY word_similarity($1, name) DESC, id
-         LIMIT 10`,
-      [searchTerm.trim()],
+      `WITH state_list AS (
+        SELECT
+          LOWER(key) AS code,
+          LOWER(value) AS full_name
+        FROM jsonb_each_text($2::jsonb)
+        )
+
+        SELECT h.*
+        FROM hospitals AS h
+
+        LEFT JOIN state_list AS s
+          ON LOWER(TRIM(h.state)) = s.code
+          OR LOWER(TRIM(h.state)) = s.full_name
+
+        WHERE LOWER($1) = s.code
+           OR word_similarity($1, COALESCE(s.full_name, h.state, '')) > 0.4
+           OR word_similarity($1, COALESCE(h.name, '')) > 0.4
+           OR word_similarity($1, COALESCE(h.address, '')) > 0.4
+           OR word_similarity($1, COALESCE(h.city, '')) > 0.4
+           OR word_similarity($1, COALESCE(h.state, '')) > 0.4
+           OR word_similarity($1, COALESCE(h.postcode, '')) > 0.4
+           OR word_similarity($1, COALESCE(h.phone, '')) > 0.4
+           
+        ORDER BY h.id`,
+      // $1, $2
+      [searchTerm, statesJson],
     );
+
+    // const result = await pool.query(
+    //   `SELECT id, name, address, city, state, postcode, phone
+    //      FROM hospitals
+    //      WHERE $1 <% name
+    //      ORDER BY word_similarity($1, name) DESC, id
+    //      LIMIT 10`,
+    //   [searchTerm.trim()],
+    // );
     res.json(result.rows);
   } catch (error) {
     console.error(error);

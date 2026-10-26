@@ -1,12 +1,10 @@
 import states from 'datasets-us-states-abbr-names';
 
-const stateData = new Map();
+// console.log(states);
 
-for (const [code, name] of Object.entries(states)) {
-  const aliases = [code.toLowerCase(), name.toLowerCase()];
+// console.log(states.PA);
+// console.log(states.CA);
 
-  stateData.set(code.toLowerCase(), aliases);
-  stateData.set(name.toLowerCase(), aliases);
-}
-
-export default stateData;
+// convert object to JSON string
+export const statesJson = JSON.stringify(states);
+// console.log(statesJson);
