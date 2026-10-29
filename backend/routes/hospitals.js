@@ -18,6 +18,12 @@ router.get('/', async (req, res) => {
     });
   }
 
+  // pagination
+  const page = Number(req.query.page ?? 1);
+  const pageSize = Number(req.query.pageSize ?? 10);
+
+  const offset = (page - 1) * pageSize;
+
   try {
     const result = await pool.query(
       `WITH state_data AS (
@@ -30,24 +36,29 @@ router.get('/', async (req, res) => {
         SELECT h.*
         FROM hospitals AS h
 
-        LEFT JOIN state_data AS s
-          ON LOWER(TRIM(h.state)) = s.state_code
-          OR LOWER(TRIM(h.state)) = s.full_state_name
-
-        WHERE LOWER($1) = s.state_code
-           OR word_similarity($1, COALESCE(s.full_state_name, h.state, '')) > 0.4
+        LEFT JOIN state_data AS sd
+          ON LOWER(TRIM(h.state)) = sd.state_code
+          OR LOWER(TRIM(h.state)) = sd.full_state_name
+        
+        WHERE LOWER($1) = sd.state_code
+           OR word_similarity($1, COALESCE(sd.full_state_name, h.state, '')) > 0.4
            OR word_similarity($1, COALESCE(h.name, '')) > 0.4
            OR word_similarity($1, COALESCE(h.address, '')) > 0.4
            OR word_similarity($1, COALESCE(h.city, '')) > 0.4
            OR word_similarity($1, COALESCE(h.state, '')) > 0.4
            OR word_similarity($1, COALESCE(h.postcode, '')) > 0.4
            OR word_similarity($1, COALESCE(h.phone, '')) > 0.4
-           
-        ORDER BY h.id`,
-      // $1, $2
-      [searchTerm, statesJson],
+        ORDER BY h.id
+        LIMIT $3 OFFSET $4`,
+      // $1 = searchTerm, $2 = statesJson
+      [searchTerm, statesJson, pageSize, offset],
     );
-    res.json(result.rows);
+    res.json({
+      items: result.rows,
+      total: 0,
+      page,
+      pageSize
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ messgae: 'Failed to search...' });
