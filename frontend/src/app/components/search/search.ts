@@ -12,8 +12,8 @@ export class Search {
 
   errorMessage = input('');
 
-  onChange = output<void>();
-  // onChange = output<string>();
+  // onChange = output<void>();
+  onChange = output<string>();
 
   // onInputChange(value: string) {
   //   console.log(value);

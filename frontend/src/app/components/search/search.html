@@ -4,14 +4,15 @@
     <input
       #searchInput
       type="text"
-      placeholder="Type hospital name..."
-      (input)="onChange.emit()"
-      (keydown.enter)="onSearch.emit(searchInput.value)"
+      placeholder="Type hospital, address, city or state..."
+      (input)="onChange.emit(searchInput.value)"
     />
+    <!-- unused -->
+    <!-- (keydown.enter)="onSearch.emit(searchInput.value)" -->
 
     <!-- search button -->
-    <button type="button" (click)="onSearch.emit(searchInput.value)">
-      <!-- icon -->
+    <!--
+      <button type="button" (click)="onSearch.emit(searchInput.value)">
       <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
         <path d="M0 0h24v24H0z" fill="none" />
         <path
@@ -23,8 +24,10 @@
         />
       </svg>
     </button>
+    -->
   </div>
 
+  <!-- error message -->
   <div class="error-section">
     @if (errorMessage()) {
       <div>

@@ -1,42 +1,26 @@
 import { Component, inject, signal } from '@angular/core';
-import { HospitalService, type HospitalType } from '../../services/hospital';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import { HospitalService, type HospitalType, type HospitalPageType } from '../../services/hospital';
 
 import { Search } from '../../components/search/search';
 import { DbGrid } from '../../components/db-grid/db-grid';
 import { DbEdit } from '../../components/db-edit/db-edit';
+import { Pagination } from '../../components/pagination/pagination';
 
 @Component({
   selector: 'app-db-search',
-  imports: [Search, DbGrid, DbEdit],
+  imports: [Search, DbGrid, DbEdit, Pagination],
   templateUrl: './db-search.html',
   styleUrl: './db-search.css',
 })
 export class DbSearch {
-  // hospitals = [
-  //   {
-  //     id: 1,
-  //     name: 'UPMC Rochester',
-  //     address: 'N/A',
-  //     city: 'N/A',
-  //     state: 'PA',
-  //     postcode: '15009',
-  //     phone: 'N/A',
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'UPMC Pittsburgh',
-  //     address: 'N/A',
-  //     city: 'N/A',
-  //     postcode: 'N/A',
-  //     state: 'PA',
-  //     phone: 'N/A',
-  //   },
-  // ];
-
   // signal
   hospitals = signal<HospitalType[]>([]);
   searchCompleted = signal(false);
   errorMessage = signal('');
+  currentPage = signal(1);
+  pageSize = signal(10);
+  total = signal(0);
 
   // tabs
   activeTab: 'search' | 'edit' = 'search';
@@ -44,10 +28,29 @@ export class DbSearch {
   // api
   private hospitalService = inject(HospitalService);
 
-  // onInputChange(value: string) {
-  //   console.log(value);
-  // }
+  // debouce
+  private searchTerms = new Subject<string>();
 
+  // initial exec
+  constructor() {
+    this.searchTerms.pipe(debounceTime(300), distinctUntilChanged()).subscribe({
+      next: (value) => {
+        this.onSearch(value);
+      },
+      error: (error) => {
+        console.error('searchTerms error...', error);
+      },
+    });
+  }
+
+  onInputChange(value: string) {
+    // console.log(value);
+
+    this.searchTerms.next(value);
+    this.errorMessage.set('');
+  }
+
+  // search
   onSearch(value: string) {
     const searchTerm = value.trim();
 
@@ -59,10 +62,12 @@ export class DbSearch {
     this.errorMessage.set('');
     this.searchCompleted.set(false);
 
-    this.hospitalService.searchApi(searchTerm).subscribe({
+    this.hospitalService.searchApi(searchTerm, this.currentPage(), this.pageSize()).subscribe({
       next: (data) => {
         console.log(data);
-        this.hospitals.set(data);
+        this.hospitals.set(data.items);
+        this.total.set(data.total);
+        this.currentPage.set(data.page);
         this.searchCompleted.set(true);
       },
       error: (error) => {

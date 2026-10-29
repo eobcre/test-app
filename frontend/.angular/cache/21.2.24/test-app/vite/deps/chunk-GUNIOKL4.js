@@ -6,7 +6,7 @@ import {
   parseCookieValue,
   setRootDomAdapter,
   withHttpTransferCache
-} from "./chunk-OJWREQAI.js";
+} from "./chunk-3NKEBRJV.js";
 import {
   APP_ID,
   ApplicationModule,
@@ -49,7 +49,6 @@ import {
   RendererStyleFlags2,
   RuntimeError,
   SecurityContext,
-  Subject,
   TESTABILITY,
   TESTABILITY_GETTER,
   TemplateRef,
@@ -59,8 +58,6 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
   XSS_SECURITY_URL,
-  __spreadProps,
-  __spreadValues,
   _global,
   _sanitizeHtml,
   _sanitizeUrl,
@@ -108,7 +105,12 @@ import {
   ɵɵinject,
   ɵɵinjectAttribute,
   ɵɵstyleProp
-} from "./chunk-6AQV7TT4.js";
+} from "./chunk-GHP7YCLX.js";
+import {
+  Subject,
+  __spreadProps,
+  __spreadValues
+} from "./chunk-PJVWDKLX.js";
 
 // node_modules/@angular/common/fesm2022/_location-chunk.mjs
 function joinWithSlash(start, end) {
@@ -6227,4 +6229,4 @@ export {
   provideClientHydration,
   VERSION2 as VERSION
 };
-//# sourceMappingURL=chunk-5YZPKOBT.js.map
+//# sourceMappingURL=chunk-GUNIOKL4.js.map
