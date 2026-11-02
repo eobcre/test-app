@@ -14,3 +14,18 @@ button:disabled {
   cursor: default;
   pointer-events: none;
 }
+
+.login-button {
+  color: #fff;
+  font-size: 15px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 12px;
+  width: 100%;
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+}
