@@ -1,6 +1,6 @@
 <div class="button-container">
   <!-- <button type="button" (click)="">{{ label() }}</button> -->
-  <button type="button" [class]="buttonClass()" (click)="clicked.emit()" [disabled]="disabled()">
+  <button [type]="type()" [class]="buttonClass()" (click)="clicked.emit()" [disabled]="disabled()">
     <ng-content />
   </button>
 </div>

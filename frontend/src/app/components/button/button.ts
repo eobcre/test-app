@@ -7,6 +7,7 @@ import { Component, input, output } from '@angular/core';
   styleUrl: './button.css',
 })
 export class Button {
+  type = input<'button' | 'submit'>('button');
   buttonClass = input<string>('');
   clicked = output<void>();
   disabled = input(false);

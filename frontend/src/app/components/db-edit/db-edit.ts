@@ -53,8 +53,8 @@ export class DbEdit {
     };
 
     this.hospitalService.saveApi(id, changes).subscribe({
-      next: (hospital) => {
-        console.log(hospital);
+      next: (res) => {
+        console.log(res);
       },
       error: (error) => {
         console.error('Save API call failed...', error);
