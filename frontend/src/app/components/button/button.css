@@ -8,3 +8,9 @@
   cursor: pointer;
   transition: all 0.9s ease;
 }
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
+}

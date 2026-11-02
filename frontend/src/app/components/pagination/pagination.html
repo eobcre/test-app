@@ -1,9 +1,14 @@
-<nav class="pagination" aria-label="Pagination">
-  <app-button>
-    <img src="assets/chevron-left.svg" alt="Previous" width="20px" height="20px" />
-  </app-button>
-  <span>1 of 10</span>
-  <app-button>
-    <img src="assets/chevron-right.svg" alt="Next" width="20px" height="20px" />
-  </app-button>
-</nav>
+@if (totalPages() > 0) {
+  <nav class="pagination" aria-label="Pagination">
+    <app-button (clicked)="onChangePage.emit(currentPage() - 1)" [disabled]="currentPage() === 1">
+      <img src="assets/chevron-left.svg" alt="Previous" width="20px" height="20px" />
+    </app-button>
+    <span>{{ currentPage() }} / {{ totalPages() }}</span>
+    <app-button
+      (clicked)="onChangePage.emit(currentPage() + 1)"
+      [disabled]="currentPage() === totalPages()"
+    >
+      <img src="assets/chevron-right.svg" alt="Next" width="20px" height="20px" />
+    </app-button>
+  </nav>
+}

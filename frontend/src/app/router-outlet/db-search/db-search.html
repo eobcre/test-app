@@ -27,14 +27,23 @@
         (onChange)="onInputChange($event)"
         [errorMessage]="errorMessage()"
       ></app-search>
-      <!-- <app-search (onChange)="onInputChange($event)"></app-search> -->
       <app-db-grid [hospitals]="hospitals()" [searchCompleted]="searchCompleted()"></app-db-grid>
-      <app-pagination></app-pagination>
+      <app-pagination
+        [currentPage]="currentPage()"
+        [totalPages]="totalPages()"
+        (onChangePage)="onChangePage($event)"
+      ></app-pagination>
+      <!-- unused -->
+      <!-- <app-search (onChange)="onInputChange($event)"></app-search> -->
     }
 
     @if (activeTab === 'edit') {
       <app-db-edit [hospitals]="hospitals()" [searchCompleted]="searchCompleted()"></app-db-edit>
-      <app-pagination></app-pagination>
+      <app-pagination
+        [currentPage]="currentPage()"
+        [totalPages]="totalPages()"
+        (onChangePage)="onChangePage($event)"
+      ></app-pagination>
     }
   </div>
 </div>

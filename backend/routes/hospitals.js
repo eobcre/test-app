@@ -21,6 +21,7 @@ router.get('/', async (req, res) => {
   // pagination
   const page = Number(req.query.page ?? 1);
   const pageSize = Number(req.query.pageSize ?? 10);
+  // console.log('req.query', req.query);
 
   const offset = (page - 1) * pageSize;
 
@@ -33,7 +34,9 @@ router.get('/', async (req, res) => {
         FROM jsonb_each_text($2::jsonb)
         )
 
-        SELECT h.*
+        SELECT 
+          h.*,
+          COUNT(*) OVER() AS total_count
         FROM hospitals AS h
 
         LEFT JOIN state_data AS sd
@@ -50,14 +53,14 @@ router.get('/', async (req, res) => {
            OR word_similarity($1, COALESCE(h.phone, '')) > 0.4
         ORDER BY h.id
         LIMIT $3 OFFSET $4`,
-      // $1 = searchTerm, $2 = statesJson
+      // $1 = searchTerm, $2 = statesJson, $3 = pageSize, $4 = offset
       [searchTerm, statesJson, pageSize, offset],
     );
     res.json({
       items: result.rows,
-      total: 0,
+      total: Number(result.rows[0]?.total_count ?? 0),
       page,
-      pageSize
+      // pageSize,
     });
   } catch (error) {
     console.error(error);

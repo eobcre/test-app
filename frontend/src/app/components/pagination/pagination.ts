@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 
 import { Button } from '../button/button';
 
@@ -8,4 +8,8 @@ import { Button } from '../button/button';
   templateUrl: './pagination.html',
   styleUrl: './pagination.css',
 })
-export class Pagination {}
+export class Pagination {
+  currentPage = input<number>(1);
+  totalPages = input<number>(1);
+  onChangePage = output<number>();
+}

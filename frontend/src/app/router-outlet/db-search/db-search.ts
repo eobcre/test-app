@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, computed } from '@angular/core';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { HospitalService, type HospitalType, type HospitalPageType } from '../../services/hospital';
 
@@ -27,9 +27,10 @@ export class DbSearch {
 
   // api
   private hospitalService = inject(HospitalService);
-
   // debouce
   private searchTerms = new Subject<string>();
+  // pagination
+  private currentSearchTerm = '';
 
   // initial exec
   constructor() {
@@ -50,8 +51,18 @@ export class DbSearch {
     this.errorMessage.set('');
   }
 
+  // pagination
+  totalPages = computed(() => Math.ceil(this.total() / this.pageSize()));
+
+  onChangePage(page: number) {
+    if (page < 1 || page > this.totalPages()) {
+      return;
+    }
+    this.onSearch(this.currentSearchTerm, page);
+  }
+
   // search
-  onSearch(value: string) {
+  onSearch(value: string, page: number = 1) {
     const searchTerm = value.trim();
 
     if (!searchTerm) {
@@ -59,12 +70,17 @@ export class DbSearch {
       return;
     }
 
+    // pagination
+    this.currentSearchTerm = searchTerm;
+    this.currentPage.set(page);
+
     this.errorMessage.set('');
     this.searchCompleted.set(false);
 
-    this.hospitalService.searchApi(searchTerm, this.currentPage(), this.pageSize()).subscribe({
+    this.hospitalService.searchApi(searchTerm, page, this.pageSize()).subscribe({
       next: (data) => {
-        console.log(data);
+        console.log('data:', data);
+
         this.hospitals.set(data.items);
         this.total.set(data.total);
         this.currentPage.set(data.page);
