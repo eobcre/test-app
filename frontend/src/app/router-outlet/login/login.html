@@ -3,21 +3,39 @@
     <h2>Hello!</h2>
     <p>Please enter your email and password to log in.</p>
 
+    <div class="error-section">
+      @if (errorMessage()) {
+        <div>
+          <p id="search-error" class="error-message">{{ errorMessage() }}</p>
+        </div>
+      }
+    </div>
+
     <form [formGroup]="loginForm" (ngSubmit)="onLogin()" novalidate>
       <div class="form-group">
         <label for="email">Email</label>
         <input
+          #LoginInput
           type="email"
           id="email"
           name="email"
           placeholder="example@email.com"
           formControlName="email"
+          (input)="onLoginInputChange(LoginInput.value)"
         />
       </div>
 
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" />
+        <input
+          #LoginInput
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+          formControlName="password"
+          (input)="onLoginInputChange(LoginInput.value)"
+        />
       </div>
       <app-button type="submit" buttonClass="login-button">Log in</app-button>
     </form>

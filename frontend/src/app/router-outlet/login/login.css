@@ -50,3 +50,8 @@ input {
 input:focus {
   border-color: #007bff;
 }
+
+.error-message {
+  color: red;
+  font-size: 0.85rem;
+}
