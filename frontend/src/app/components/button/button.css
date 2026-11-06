@@ -39,3 +39,11 @@ button:disabled {
   cursor: pointer;
   padding: 7px;
 }
+
+.edit-button,
+.save-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
