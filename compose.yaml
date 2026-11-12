@@ -20,6 +20,7 @@ services:
       PGUSER: hospital_user
       PGPASSWORD: hospital_pass
       PGDATABASE: hospital_db
+      JWT_SECRET: ${JWT_SECRET}
     depends_on:
       - db
 
