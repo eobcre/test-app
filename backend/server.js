@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 
-import hospitalRouter from './routes/hospitals.js';
-import loginRouter from './routes/login.js';
+import hospitalRouter from './routes/hospitalRouter.js';
+import loginRouter from './routes/loginRouter.js';
 import { message } from './data/data.js';
 
 const app = express();
