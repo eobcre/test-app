@@ -52,6 +52,8 @@ router.post('/', async (req, res, next) => {
       });
     }
 
+    console.log('JWT SECRET:', Boolean(process.env.JWT_SECRET));
+
     // === JWT token ===
     // generate JWT token
     const token = jwt.sign(
@@ -100,7 +102,15 @@ router.get('/me', verifyToken, async (req, res) => {
     [req.userId],
   );
 
-  return res.json({ user: result.rows[0] });
+  const user = result.rows[0];
+
+  if (!user) {
+    return res.status(401).json({
+      message: 'User Not Found.',
+    });
+  }
+
+  return res.json({ user });
 });
 
 // log out
