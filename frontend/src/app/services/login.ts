@@ -17,6 +17,8 @@ export class LoginService {
   loginApi(email: string, password: string) {
     const body = { email, password };
 
-    return this.http.post<LoginRequestType>(`${environment.apiUrl}/api/login`, body);
+    return this.http.post<LoginRequestType>(`${environment.apiUrl}/api/login`, body, {
+      withCredentials: true,
+    });
   }
 }

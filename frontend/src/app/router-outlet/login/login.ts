@@ -50,7 +50,6 @@ export class Login {
     this.loginService.loginApi(email, password).subscribe({
       next: (res) => {
         console.log(res);
-        this.authService.setAuthenticated(true);
         this.router.navigate(['/home']);
       },
       error: (error) => {
