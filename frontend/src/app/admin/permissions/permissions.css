@@ -1,0 +1,19 @@
+.permissions-container {
+  padding-right: 3rem;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 2rem;
+}
+
+.title-description {
+  color: #808080;
+  font-size: 14px;
+}
+
+.dropdown {
+  padding: 1rem 0 2rem 0;
+}
