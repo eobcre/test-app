@@ -1,6 +1,7 @@
 .button {
   background: none;
   border: none;
+  padding: 5px;
 }
 
 .button:hover {
@@ -38,12 +39,4 @@ button:disabled {
   border-radius: 6px;
   cursor: pointer;
   padding: 7px;
-}
-
-.edit-button,
-.save-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 5px;
 }
