@@ -1,3 +1,17 @@
-<div class="user-management-container">
-  <app-admin-grid></app-admin-grid>
+<div class="container">
+  <div class="user-management-container">
+    <div class="heading">
+      <div class="title-container">
+        <h2>Users</h2>
+        <p class="title-description">Manage users with add, edit and status change.</p>
+      </div>
+
+      <app-button buttonClass="button add-user-button"
+        ><span class="plus-icon">
+          <img src="assets/add.svg" alt="AddIcon" width="16px" height="16px" /></span
+        >Add User</app-button
+      >
+    </div>
+    <app-admin-grid></app-admin-grid>
+  </div>
 </div>

@@ -1,3 +1,26 @@
 .user-management-container {
-  margin-top: 2rem;
+  padding-right: 3rem;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 2rem;
+}
+
+.title-description {
+  color: #808080;
+  font-size: 14px;
+}
+
+.plus-icon {
+  display: flex;
+  align-items: center;
 }
