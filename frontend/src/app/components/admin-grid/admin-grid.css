@@ -1,0 +1,36 @@
+.grid-row {
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr 2fr;
+}
+
+.grid-row > div {
+  display: flex;
+  align-items: center;
+
+  border-bottom: 1px solid lightgray;
+  overflow-wrap: anywhere;
+  padding: 12px;
+}
+
+.row {
+  color: #303030;
+  font-size: 0.9rem;
+}
+
+.heading {
+  color: #303030;
+  font-weight: bold;
+}
+
+.status {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 20px;
+  padding: 5px 12px;
+}
+
+.active {
+  color: #15803d;
+  background-color: #dcfce7;
+}
