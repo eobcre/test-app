@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="tabs">
+    <button
+      type="button"
+      class="tab"
+      [class.active]="adminTab === 'user-management'"
+      (click)="adminTab = 'user-management'"
+    >
+      User Management
+    </button>
+    <button
+      type="button"
+      class="tab"
+      [class.active]="adminTab === 'permissions'"
+      (click)="adminTab = 'permissions'"
+    >
+      Permissions
+    </button>
+  </div>
+
+  @if (adminTab === 'user-management') {
+    <app-user-management></app-user-management>
+  }
+
+  @if (adminTab === 'permissions') {
+    <app-permissions></app-permissions>
+  }
+</div>
