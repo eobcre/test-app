@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { AdminGrid } from '../../components/admin-grid/admin-grid';
 
 @Component({
   selector: 'app-user-management',
-  imports: [],
+  imports: [AdminGrid],
   templateUrl: './user-management.html',
   styleUrl: './user-management.css',
 })

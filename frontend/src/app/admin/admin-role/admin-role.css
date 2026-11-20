@@ -1,0 +1,15 @@
+.grid-row {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 1fr 1fr 1.5fr;
+}
+
+.grid-row > div {
+  border-bottom: 1px solid lightgray;
+  overflow-wrap: anywhere;
+  padding: 12px;
+}
+
+.row {
+  color: #303030;
+  font-size: 0.9rem;
+}
