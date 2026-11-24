@@ -7,6 +7,7 @@ interface User {
   id: number;
   name: string;
   email: string;
+  role_id: number;
 }
 
 interface Response {
@@ -18,6 +19,7 @@ interface Response {
 })
 export class AuthService {
   private http = inject(HttpClient);
+
   private loggedIn = signal(false);
   private currentUser = signal<User | null>(null);
 
@@ -25,8 +27,10 @@ export class AuthService {
     return this.loggedIn();
   }
 
+  // get user info
   readonly user = this.currentUser.asReadonly();
 
+  // check auth
   async checkAuth(): Promise<boolean> {
     try {
       const res = await firstValueFrom(

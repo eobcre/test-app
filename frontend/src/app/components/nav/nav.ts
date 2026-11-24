@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { Button } from '../button/button';
@@ -11,7 +11,8 @@ import { AuthService } from '../../auth/auth-service';
   styleUrl: './nav.css',
 })
 export class Nav {
-  constructor(private authService: AuthService) {}
+  // constructor(private authService: AuthService) {}
+  authService = inject(AuthService);
 
   onLogout() {
     this.authService.logout();

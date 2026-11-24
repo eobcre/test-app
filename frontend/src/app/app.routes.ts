@@ -6,15 +6,25 @@ import { Counter } from './router-outlet/counter/counter';
 import { ApiPage } from './router-outlet/api-page/api-page';
 import { DbSearch } from './router-outlet/db-search/db-search';
 
+// admin
+import { AdminRole } from './admin/admin-role/admin-role';
+
+// login
 import { Login } from './router-outlet/login/login';
 
 import { authGuard } from './auth/auth-guard';
+import { roleGuard } from './admin/role-guard';
 
 export const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full',
+  },
+  {
+    path: 'admin-role',
+    component: AdminRole,
+    canActivate: [roleGuard],
   },
   {
     path: 'login',

@@ -52,8 +52,6 @@ router.post('/', async (req, res, next) => {
       });
     }
 
-    console.log('JWT SECRET:', Boolean(process.env.JWT_SECRET));
-
     // === JWT token ===
     // generate JWT token
     const token = jwt.sign(
@@ -90,13 +88,13 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-// === get user info API ===
+// === verify and get user info API ===
 router.get('/me', verifyToken, async (req, res) => {
   // do not cache
   res.set('Cache-Control', 'no-store');
 
   const result = await pool.query(
-    `SELECT id, name, email
+    `SELECT id, name, email, role_id
      FROM users
      WHERE id = $1`,
     [req.userId],

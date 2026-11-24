@@ -5,7 +5,6 @@ import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Button } from '../../components/button/button';
 
 import { LoginService } from '../../services/login';
-import { AuthService } from '../../auth/auth-service';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +24,6 @@ export class Login {
   // api
   private loginService = inject(LoginService);
   private router = inject(Router);
-  private authService = inject(AuthService);
 
   onLoginInputChange(value: string) {
     // console.log(value);
