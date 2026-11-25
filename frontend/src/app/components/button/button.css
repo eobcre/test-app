@@ -53,3 +53,12 @@ button:disabled {
   transition: background-color 0.2s ease;
   padding: 8px 16px;
 }
+
+.inactivate-button {
+  font-size: 12px;
+}
+
+.remove-button {
+  color: red;
+  font-size: 12px;
+}

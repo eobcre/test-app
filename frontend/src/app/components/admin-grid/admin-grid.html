@@ -10,8 +10,12 @@
   <div class="row">Admin</div>
   <div class="row"><span class="status active">Active</span></div>
   <div>
-    <app-button buttonClass="button">
+    <app-button buttonClass="button" (clicked)="toggleDropdown()">
       <img src="assets/dots.svg" width="20px" height="20px" />
     </app-button>
+
+    @if (isDropdownOpen) {
+      <app-dropdown (removeUser)="onRemoveUser()"></app-dropdown>
+    }
   </div>
 </div>
