@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+
 import { Button } from '../button/button';
 import { Dropdown } from '../dropdown/dropdown';
+
+import { User } from '../../services/users';
 
 @Component({
   selector: 'app-admin-grid',
@@ -9,6 +12,8 @@ import { Dropdown } from '../dropdown/dropdown';
   styleUrl: './admin-grid.css',
 })
 export class AdminGrid {
+  users = input.required<User[]>();
+
   isDropdownOpen = false;
 
   toggleDropdown(): void {

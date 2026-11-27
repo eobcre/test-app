@@ -1,21 +1,23 @@
 <div class="grid-row heading">
   <div>Name</div>
   <div>Role</div>
-  <div>Status</div>
+  <div>Permissions</div>
   <div></div>
 </div>
 
-<div class="grid-row">
-  <div class="row">Emmy</div>
-  <div class="row">Admin</div>
-  <div class="row"><span class="status active">Active</span></div>
-  <div>
-    <app-button buttonClass="button" (clicked)="toggleDropdown()">
-      <img src="assets/dots.svg" width="20px" height="20px" />
-    </app-button>
+@for (user of users(); track user.id) {
+  <div class="grid-row">
+    <div class="row">{{ user.name }}</div>
+    <div class="row">{{ user.role }}</div>
 
-    @if (isDropdownOpen) {
-      <app-dropdown (removeUser)="onRemoveUser()"></app-dropdown>
-    }
+    <div>
+      <app-button buttonClass="button" (clicked)="toggleDropdown()">
+        <img src="assets/dots.svg" width="20px" height="20px" />
+      </app-button>
+
+      @if (isDropdownOpen) {
+        <app-dropdown (removeUser)="onRemoveUser()"></app-dropdown>
+      }
+    </div>
   </div>
-</div>
+}

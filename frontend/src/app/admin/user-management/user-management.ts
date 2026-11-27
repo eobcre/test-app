@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+
+import { User } from '../../services/users';
 
 import { AdminGrid } from '../../components/admin-grid/admin-grid';
-
 import { Button } from '../../components/button/button';
 
 @Component({
@@ -10,4 +11,6 @@ import { Button } from '../../components/button/button';
   templateUrl: './user-management.html',
   styleUrl: './user-management.css',
 })
-export class UserManagement {}
+export class UserManagement {
+  users = input.required<User[]>();
+}

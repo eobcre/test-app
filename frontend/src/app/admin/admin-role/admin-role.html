@@ -19,7 +19,7 @@
   </div>
 
   @if (adminTab === 'user-management') {
-    <app-user-management></app-user-management>
+    <app-user-management [users]="users()"></app-user-management>
   }
 
   @if (adminTab === 'permissions') {

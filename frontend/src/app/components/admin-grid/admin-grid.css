@@ -22,15 +22,13 @@
   font-weight: bold;
 }
 
-.status {
+.permission {
   display: inline-block;
+  color: white;
+  background-color: #aaaaaa;
   font-size: 12px;
   font-weight: 500;
   border-radius: 20px;
+  margin-right: 0.3rem;
   padding: 5px 12px;
-}
-
-.active {
-  color: #15803d;
-  background-color: #dcfce7;
 }
