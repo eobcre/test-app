@@ -3,6 +3,7 @@ import cors from 'cors';
 
 import hospitalRouter from './routes/hospitalRouter.js';
 import loginRouter from './routes/loginRouter.js';
+import adminRouter from './routes/adminRouter.js'
 import { message } from './data/data.js';
 
 import cookieParser from 'cookie-parser';
@@ -16,6 +17,7 @@ app.use(cookieParser());
 
 app.use('/api/hospitals', hospitalRouter);
 app.use('/api/login', loginRouter);
+app.use('/api/admin', adminRouter);
 
 // app.get('/', (req, res) => {
 //     res.send("Express server test.")
